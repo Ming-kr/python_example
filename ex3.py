@@ -165,11 +165,210 @@ print(fruit)
 if '배' in fruit:
     print('내가 시렇어하는 배가 있다')
 
+#대화형이라 .... 중간에 import 해도 됨....
+import random
+
+numbers = []
+for num in range(0,10,1):
+    numbers.append(random.randrange(0,100))
+
+print("랜덤 값들 : ",numbers)
+
+
+#출력과 값 입력을 동시에 가능 함...
+#test = input("값을 입력하세요 : ")
 
 
 
+########################반복문######################
 
+#for i in range(3):
+#for i in range(0,3):
+for i in range(0,3,1):
+    print("안녕하세요")
+
+#foreach 문.....
+for i in [0,1,2]:
+    print("반갑습니다")
+
+
+#파이썬 for문 팁... 사용하지 않는 i는 _로(변수임) 사용... 명명법
+
+#while문과 for문의 확실한 분리...
+
+for i in range(2,10):
+    print("=======%d단=======" %i)
+    for x in range(1,10):
+        print("%d X %d = %d" %(i,x,i*x))
+
+test = 0
+
+while True :
+    test += 1
+    if test > 10:
+        break
+
+    if test%2==0:
+        continue
     
+    print("while문.. True")
+    
+
+print("\u2665")
+
+
+###################자료 구조 (리스트,튜플,딕셔너리)##################
+#파이썬은 아예 문법으로 자료구조를 제공함...
+#최대 핵심.... 파이썬 존재의 이유....
+
+aa = [10,2,3,4,"asdad",3.455]
+
+print(aa[4])
+
+aa = [] #빈 리스트 생성 ... 확실히 자료 구조 인듯...
+aa.append(10)
+aa.append(10)
+aa.append("113sad")
+aa.append(10)
+aa.append(10)
+
+print(aa[2])
+
+print("리스트 카운트 :" , len(aa))
+
+#print(aa[10])
+
+for i in aa:
+    print("test aa : " , i)
+
+bb = aa[1:3] #범위 지정 인덱스 1부터 3이전까지 인듯....
+
+print("test :",bb)
+
+print("test - :",bb[-1]) #음수 값으로 접근 가능 ... 뒤에부터...
+
+print(aa[2:]) #2번 부터...
+print(aa[:2]) #2번 이전 까지...
+
+aa += aa #리스트 끼리 연산 가능...빼기도 되나??
+#aa -= aa #안됨
+print(aa)
+
+aa *= 3 #똑같은것 3개... 붙임...
+print("======")
+print(aa)
+
+print("======")
+bb = aa[::2]
+print(bb) #2개씩 건너뛰어 만들기...
+bb = aa[::-2]
+print(bb) #뒤에서 부터 2개씩 건너뛰어 만들기...
+
+bb = aa[:] #복사
+
+print("======")
+aa[1:3] = [200,300,11,111,23,3]  #중간 값 변경...
+#대박.... 꼭 일치 하지 않아도...알아서 맞추는듯... 아니다... 이건 머냐!!!
+#위에 범위를 지우고 새로운 내용을 끼워 넣는다....
+print(aa)
+
+
+###슬슬 먼가 이상함.... 이거 메모리 구조가 어떻게 되는거지?????
+## aa[1:3] << 이 경우 복사생성후 메모리 리턴 구조 아닌가????
+
+print("=================test================")
+
+print(aa)
+del(aa[0]) #???????? 무엇을 근거로 지는거??
+#값? 참조 주소?? append가 있으면 지는것도 있을텐데....
+#우선 값은 아닌듯...
+aa.remove(10)
+aa.remove(10)
+aa.remove(10)
+aa.remove(10) #이 녀석이 값으로 지우네... 근데 하나만 지움... 먼가 방법이 있겠지...
+print(aa)
+
+aa[1:4] = [] #인덱스 1~3까지 삭제....
+
+aa = None # null인듯....
+
+########################리스트 API 예제###################
+print("########################리스트 API 예제###################")
+myList = [30, 10, 20]
+print("현재 리스트 : %s" % myList)
+myList.append(40)
+print("append(40) 후의 리스트 : %s" % myList)
+print("pop()으로 추출한 값 : %s" % myList.pop())
+print("pop() 후의 리스트 : %s" % myList)
+myList.sort() #정렬은 무엇을 기준으로??? 그리고 기준 정할 수 있나??
+print("sort() 후의 리스트 : %s" % myList)
+myList.reverse()
+print("reverse() 후의 리스트 : %s" % myList)
+print("20값의 위치 : %d" % myList.index(20))
+myList.insert(2, 222)
+print("insert(2, 222) 후의 리스트 : %s" % myList)
+myList.remove(222)
+print("remove(222) 후의 리스트 : %s" % myList)
+myList.extend( [77, 88, 77] ) # + 하고 기능 동일....
+print("extend([77, 88, 77]) 후의 리스트 : %s" % myList)
+print("77값의 개수 : %d" % myList.count(77))
+newList = myList.copy() #복사 생성...
+
+
+###그외... API###
+del(myList[1]) ##위치값 지움....혹은...#myList[1] = []
+print(len(myList))
+newList = sorted(myList) #기존 리스트는 놔두고 새로운 리스트 소트해서 생성...
+
+
+###########튜플#########
+#튜플 생성..... ( )로 생성...
+#읽기 전용....
+
+tt1 = (10,20,30)
+tt2 = 10,20,30 #이렇게도됨...
+tt3 = 10, #항목이 하나인 튜플... 혹은 (10,)
+nottt4 = (10) #이건 튜플 아닌듯...
+print(type(tt3))
+print(type(nottt4))
+
+del(tt3) #튜플 삭제....
+print(tt1[1]) #접근
+#접근은 리스트와 비슷함... 범위 포함...
+#튜플도 더하기 곱하기 됨.... 새로운 투플 만드니까 그렇겠지??
+
+#튜플 리스트로 변환
+myList = list(tt1)
+
+##########딕셔너리#########
+#해쉬맵....임....순서대로 안들어감...
+
+dic1 = {'s001':1111,'s002':2222,'s003':3333}
+
+print(dic1['s001'])
+print(dic1.get('s001'))
+
+dic1['s001'] = 1234
+
+del(dic1['s002'])
+
+
+print(dic1.keys()) ##얜 리턴 타입이 머냐?????? 리스트 인듯....튜플인가??
+print(type(dic1.keys())) ##dict_keys 타입이네.... 어쨌든 list(dic1.keys())로 변환 가능...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
