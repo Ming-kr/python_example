@@ -352,9 +352,97 @@ dic1['s001'] = 1234
 
 del(dic1['s002'])
 
-
 print(dic1.keys()) ##얜 리턴 타입이 머냐?????? 리스트 인듯....튜플인가??
 print(type(dic1.keys())) ##dict_keys 타입이네.... 어쨌든 list(dic1.keys())로 변환 가능...
+
+print(dic1.values()) #값... 리턴... list(dic1.values())로 변환 가능..
+
+print(dic1.items()) #[(키,값),(키,값)] 튜플 형태로 반환... 근데 모양은 리스트에 튜플인데??? 머 별 필요 없을것 같다....
+
+
+print('s001' in dic1) #키값 검색...
+
+dic2 = {} #빈 딕셔너리 만들기....!!!
+
+##딕셔너리.. 예제
+##키로 정렬후 딕셔너리 추출...?? 귀찮....
+import operator
+
+trainDic, trainList = {}, []
+
+trainDic = {'Thomas':'토마스', 'Edward':'에드워드', 'Henry':'헨리', 'Gothen':'고든', 'James':'제임스'}
+trainList = sorted(trainDic.items(), key=operator.itemgetter(0)) ##정렬 기준 정하는 방법 인듯.. 귀찮...
+
+print(trainList)
+
+
+###########Set#########
+mySet1 = {1,2,3,5,7,8} #선언은 딕셔너리와 같이 중괄호... 키값으로만 안 넣으면 됨...
+mySet2 = set(myList) #리스트를 셋으로 변경.. 값 중복시 제거.... 당연....
+
+mySet3 = mySet1 & mySet2
+mySet3 = mySet1 | mySet2
+mySet3 = mySet1 - mySet2
+mySet3 = mySet1 ^ mySet2 #대칭 차 집합....
+
+#함수로도 됨...
+
+mySet3 = mySet1.intersection(mySet2)
+mySet3 = mySet1.union(mySet2)
+mySet3 = mySet1.difference(mySet2)
+mySet3 = mySet1.symmetric_difference(mySet2)
+
+
+####기타 자료구조 잡다....
+#컴프리헨션
+#리스트 = [수식 for 항목 int range(...) if 조건식]
+numList = [num for num in range(1,6)]
+print(numList)
+
+#1~20 숫자 중에서 3의 배수로만 리스트를 구성
+numList = [num for num in range(1,21) if num%3==0]
+print(numList)
+
+# test : print(type(range(3,10)))
+
+#동시에 여러 리스트에 접근
+#리스트 크기가 다르면.... 적은쪽에 맞추는듯...
+foods = ['ㅂㅈㄷㅂ','ㅂㅈㅂㅂ','ㅈㅈㅈ','ㅇㅇㅇㅇ']
+sides = ['11111','22222','33333','44444''55555']
+
+for food,side in zip(foods,sides):
+    print(food,'--->',side)
+
+#zip() 예제 7-6쪽..... 아 슬슬 진짜 귀찮다....
+
+#얕은 복사.... 깊은 복사.... 내용 확인....
+#근데 설명 먼가 조금 이상함... 얕은 복사의 기준이.......
+oldList = [1,23,22,4,5]
+newList = oldList[:]
+
+###################################문자열#################################
+
+#결과적으로 한글자씩에 해당하는 문자 리스트임... 끝....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
