@@ -2,6 +2,10 @@ print("안녕하세요")
 print("100")
 print("%d 안ㄴ ... %s" %(100,"da"))
 
+print("안녕하세요" , end='') #한줄...\n 제외..
+print("반갑습니다")
+
+
 #표현식...
 print("10진수 : %d 16진수 : %x 8진수 : %o .... %s 실수 : %f" %(100,100,100,"afasdfasf",0.1231))
 print("정렬 기능.... %20d %20d %20s " %(100,200,"안녕하세요반갑습니다..."))
@@ -428,52 +432,292 @@ newList = oldList[:]
 
 
 
+###########################함수##############################
+
+## 전역 변수 선언 부분 ##
+coffee = 0
+
+## 함수 선언 부분 ##
+def coffee_machine(button) :
+     print()
+     print("#1. (자동으로) 뜨거운 물을 준비한다.");
+     print("#2. (자동으로) 종이컵을 준비한다.");
+
+     if button == 1 :
+          print("#3. (자동으로) 보통커피를 탄다.")
+     elif button == 2 :
+          print("#3. (자동으로) 설탕커피를 탄다.")
+     elif button == 3 :
+          print("#3. (자동으로) 블랙커피를 탄다.")
+     else :
+          print("#3. (자동으로) 아무거나 탄다.\n")
+
+     print("#4. (자동으로) 물을 붓는다.");
+     print("#5. (자동으로) 스푼으로 젓는다.");
+     print()
+
+## 메인 코드 부분 ##
+coffee = int(input("어떤 커피 드릴까요?(1:보통, 2:설탕, 3:블랙)"))
+coffee_machine(coffee)
+print("손님~ 커피 여기 있습니다.")
+
+
+##############################################################
+
+## 함수 선언 부분 ##
+def plus( v1, v2 = 0) :  #기본값 설정 가능...
+     global globalValue #외부에 있는 전역변수 사용
+     result = 0
+     result = v1 + v2
+     return result
+
+## 전역 변수 선언 부분 ##
+hap = 0
+globalValue = 10
+## 메인 코드 부분 ##
+hap = plus(100, 200)
+print("100과 200의 plus() 함수 결과는 %d" % hap)
+
+
+if True :
+    pass #아무것도 할게 없을때 공백 불가...!
+else :
+    pass
+
+
+
+## 함수 선언 부분 ##
+def para_func(*para) : #매개변수 갯수를 지정하지 않음... 리스트 계열...
+     result = 0
+     for num in para :
+          result = result + num
+
+     return result
+
+## 전역 변수 선언 부분 ##
+hap = 0
+
+## 메인 코드 부분 ##
+hap = para_func(10, 20)
+print("매개변수가 2개인 함수를 호출한 결과 ==> %d" % hap)
+hap = para_func(10, 20, 30)
+print("매개변수가 3개인 함수를 호출한 결과 ==> %d" % hap)
+
+
+
+#딕셔너리 형식의 매개변수 전달 ... 걍 딕셔너리 자체를 전달하는게 더 효율...
+def dic_func(**para):
+    for k in para.keys():
+        print("%s ----> %d명입니다." %(k,para[k]))
+
+dic_func(트와이스 = 9 , 소녀시대 = 7 , 블랙핑크 = 4) #??? ㄷㄷㄷㄷ
+
+
+안녕하세요 = 7
+print(안녕하세요) ##??? ㄷㄷㄷㄷ
+
+
+######파일 분할######
+
+import Module1 #파일명...... .py 제외...
+Module1.func1()
+Module1.func2()
+Module1.func3()
+
+from Module1 import * # *부분 ... 함수명... 함수1, 함수2, 함수3
+func1()
+func2()
+func3()
+
+print(dir(__builtins__))
+
+##############패키지의 사용###########
+
+#from p1.Module1 import * #강의 자료에는 패키지 선언부가 없다..;; 찾아 볼것..
+#p1.func1()
+
+###함수 안에 함수 선언 가능...단 외부에서는 접근 불가...
+
+
+###람다....
+hapProcess = lambda v1 , v2 : v1+v2
+hap = hapProcess(1,3)
+print(hap)
+
+
+####제너레이터 함수????? 메커니즘... 머냐 이건;;;####
+#yield문이 포함 되면... 값 반환 후 계속 진행???
+#리스트에 채우는 형식??? or 쓰레드??? 다... 끝난 다음에 실행되는거 보니... 리스트 채우는 매커니즘 인듯....
+#제너레이터 함수 이름이니... 값 만들어 내는.... 머 그런거 겠지...
+
+def genFunc(num):
+    for i in range(0,num):
+        yield i
+        print('제너레이터 진행중..')
+
+print(genFunc(10))
+print(list(genFunc(10)))
+
+
+
+#####################################클래스#####################################
+
+class  Car :
+    color = ""
+    speed = 0
+    count = 0 #클래스 변수 static으로 사용하기 위해선 Car.count 로 접근... 근데 이거... 인스턴스 변수도 생기고 스태틱 변수도 생기는 구조 인가??? 확인 해 볼것...
+
+    def __init__(self,color,speed): #생성자...
+        self.color = color
+        self.speed = speed
+        Car.count += 1
+
+    def __del__(self): #소멸자..
+        print("자동차 소멸됨")
+
+    def __repr__(self) : #toString
+        return "자동차 입니당~"
+
+    def __add__(self,other): # +연산자 오버로딩
+        return self
+
+    def __eq__(self,other): # ==연산자 오버로딩
+        return False
+
+    #기타...연산자 오버로딩 가능함....별 필요 없겠지만...
+    
+    def  upSpeed(self, value) :
+        self.speed += value
+    
+    def  downSpeed(self, value) :
+        self.speed -= value
+
+myCar1 = Car('빨강',100)
+myCar2 = Car('파랑',200)
+myCar3 = Car('노랑',300)
+myCar4 = None
+
+myCar1.upSpeed(30)
+myCar1.downSpeed(10)
+print(myCar1.speed)
+print(Car.count)
+myCar2 = None
+
+#상속 및 오버라이딩
+
+class Sedan(Car) :
+    def upSpeed(self, value):
+        self.speed += value
+        
+        if self.speed > 150 :
+            self.speed = 150
+            
+        print("현재 속도(서브 클래스) : %d" % self.speed)
+
+class Truck(Car) :
+    pass
+
+
+#추상 클래스...
+
+## 클래스 선언 부분 ##
+class SuperClass :
+    def  method(self) : #추상 메소드... pass 해주면 됨... 음.... 글쎄.... 아닌듯.... 책 내용 완전 정확하진 않음....익셉션 발생으로 처리...
+        #pass
+        raise NotImplementedError()
+
+class SubClass1 (SuperClass) :
+    pass
+    def method(self) :  # 메소드 오버라이딩
+        print('SubClass1에서 method()를 오버라이딩함')
+
+class SubClass2 (SuperClass) :
+    pass
+
+
+sub1 = SubClass1()
+sub2 = SubClass2()
+
+sub1.method()
+#sub2.method()
+
+
+################쓰레드##################
+#걍 예제로 대체........ 필요할때 확인...
+
+import threading
+import time
+
+## 클래스 선언 부분 ##
+class RacingCar :
+    carName = ''
+    def  __init__(self, name) :
+        self.carName = name
+
+    def runCar(self) :
+        for _ in range(0, 3) :
+            carStr = self.carName + '~~ 달립니다.\n'
+            print(carStr, end = '')
+            time.sleep(0.1)   # 0.1초 멈춤
+
+## 메인 코드 부분 ##
+car1 = RacingCar('@자동차1')
+car2 = RacingCar('#자동차2')
+car3 = RacingCar('$자동차3')
+
+th1 = threading.Thread(target = car1.runCar)
+th2 = threading.Thread(target = car2.runCar)
+th3 = threading.Thread(target = car3.runCar)
+
+th1.start()
+th2.start()
+th3.start()
+
+#############################멀티 프로세싱#############################
+#쓰레드와의 차이는 아마도.... 병렬 처리 겠지.... CPU
+#예제로 대체....
+
+import multiprocessing
+import time
+
+## 클래스 정의 부분
+class RacingCar :
+    carName = ''
+    def  __init__(self, name) :
+        self.carName = name
+
+    def runCar(self) :
+        for _ in range(0, 3) :
+            carStr = self.carName + '~~ 달립니다.\n'
+            print(carStr, end = '')
+            time.sleep(0.1) # 0.1초 멈춤
+
+## 메인 코드 부분
+if __name__ == "__main__" :
+    car1 = RacingCar('@자동차1')
+    car2 = RacingCar('#자동차2')
+    car3 = RacingCar('$자동차3')
+
+    mp1 = multiprocessing.Process(target=car1.runCar)
+    mp2 = multiprocessing.Process(target=car2.runCar)
+    mp3 = multiprocessing.Process(target=car3.runCar)
+
+    mp1.start()
+    mp2.start()
+    mp3.start()
+    
+    mp1.join()
+    mp2.join()
+    mp3.join()
+    
+
+#####중요한.... 동기화 관련 내용은 강의 자료에 없는듯...
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#########################문법 끝~~~~~~~~~~~!!!!!!!!!########################
 
 
 
