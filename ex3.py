@@ -487,7 +487,7 @@ else :
 
 
 ## 함수 선언 부분 ##
-def para_func(*para) : #매개변수 갯수를 지정하지 않음... 리스트 계열...
+def para_func(*para) : #*para ->매개변수 갯수를 지정하지 않음... 리스트 계열...
      result = 0
      for num in para :
           result = result + num
@@ -505,7 +505,7 @@ print("매개변수가 3개인 함수를 호출한 결과 ==> %d" % hap)
 
 
 
-#딕셔너리 형식의 매개변수 전달 ... 걍 딕셔너리 자체를 전달하는게 더 효율...
+#**para -> 딕셔너리 형식의 매개변수 전달 ... 걍 딕셔너리 자체를 전달하는게 더 효율...
 def dic_func(**para):
     for k in para.keys():
         print("%s ----> %d명입니다." %(k,para[k]))
@@ -524,7 +524,9 @@ Module1.func1()
 Module1.func2()
 Module1.func3()
 
-from Module1 import * # *부분 ... 함수명... 함수1, 함수2, 함수3
+#아래 구문 아나콘다에서는 주의로 표기 됨...
+#from Module1 import * # *부분 ... 함수명... 함수1, 함수2, 함수3
+from Module1 import func1,func2,func3 # *부분 ... 함수명... 함수1, 함수2, 함수3
 func1()
 func2()
 func3()
@@ -678,7 +680,7 @@ th3.start()
 #예제로 대체....
 
 import multiprocessing
-import time
+#import time
 
 ## 클래스 정의 부분
 class RacingCar :
